@@ -1,0 +1,2 @@
+if 4 day moving average breaks above 50 day moving average, buy
+if 4 day moving average breaks below 50 day moving average, sell
