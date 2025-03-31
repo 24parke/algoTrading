@@ -8,13 +8,16 @@ stocks = ["AAPL", "MSFT", "GOOG", "NVDA", "META", "AMZN", "TSLA"]
 
 stock_data = yf.download(stocks, period = "max", interval = "1d", group_by = "tickers")
 stock_data = stock_data.dropna()
-stock_data.to_csv("new_data.csv")
-stock_data = pd.read_csv("new_data.csv", header = [0, 1], index_col = 0)
+
+# stock_data = pd.read_csv("new_data.csv", header = [0, 1], index_col = 0)
 stock_data.index = pd.to_datetime(stock_data.index)
 
 for ticker in stocks:
-    stock_data[ticker]['100_SMA'] = stock_data[ticker]['Close'].rolling(window = 100).mean()
-    stock_data[ticker]['5_SMA'] = stock_data[ticker]['Close'].rolling(window = 5).mean()
+    stock_data[(ticker, '100_SMA')] = stock_data[ticker]['Close'].rolling(window = 100).mean()
+    stock_data[(ticker, '5_SMA')] = stock_data[ticker]['Close'].rolling(window = 5).mean()
+stock_data.to_csv("new_data.csv")
+
+
 
 
 print(stock_data)
